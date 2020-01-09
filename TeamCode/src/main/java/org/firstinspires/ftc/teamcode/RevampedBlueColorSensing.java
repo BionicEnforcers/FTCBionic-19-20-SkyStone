@@ -37,14 +37,22 @@ public void runOpMode() {
     {
         //Drive Forward Certain distance to scan Stones and Skystones
         DriveForwardDistance(.7,25);
+        telemetry.addData("Color Number of Left Color Sensor: ", robot.LeftColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)));
+        telemetry.addData("Color Number of Right Color Sensor: ", robot.RightColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)));
+        telemetry.update();
+        sleep(1000);
         //Use the Left Color Sensor to Scan for a SkyStone
         //Checks if the Object is a Stone
-        if(robot.LeftColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)) == 8 || robot.RightColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)) == 9)
+        if((robot.LeftColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)) == 8 || robot.LeftColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)) == 9) && (robot.RightColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)) == 8 || robot.RightColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)) == 9))
         {
             //Since the object is a Stone the Robot Strafes to scan the next Stone
             StrafRightDistance(.2,5);
+            telemetry.addData("Color Number of Left Color Sensor: ", robot.LeftColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)));
+            telemetry.addData("Color Number of Right Color Sensor: ", robot.RightColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)));
+            telemetry.update();
+            sleep(1000);
             //After Strafing the Robot scans again to check what the next object is
-            if(robot.LeftColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)) == 8 || robot.RightColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)) == 9)
+            if((robot.LeftColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)) == 8 || robot.LeftColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)) == 9) && (robot.RightColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)) == 8 || robot.RightColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)) == 9) )
             {
                 //This is SkyStone Location number 3 (SkyStone Stone Stone)
                 //Since the next object is also a Stone the robot strafes to the next object
