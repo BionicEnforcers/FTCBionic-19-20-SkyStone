@@ -49,8 +49,9 @@ public class TestAutomonous extends LinearOpMode
         waitForStart();
 
 //        DriveForwardDistance(.5,15);
-
-        TurnRightDistance(.5,22);
+        DriveForwardDistance(.5,10);
+        sleep(500);
+        StrafRightDistance(1,10);
 
 
     }

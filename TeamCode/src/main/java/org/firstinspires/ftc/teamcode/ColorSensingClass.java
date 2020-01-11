@@ -12,16 +12,16 @@ import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cColorSensor;
 @Autonomous (name="TestColorSensing", group="BionicBot")
 public class ColorSensingClass extends LinearOpMode {
 
-    HardwareBionicbot         robot   = new HardwareBionicbot();   // Use a Pushbot's hardware
-    private ElapsedTime runtime = new ElapsedTime();
-    static final double     COUNTS_PER_MOTOR_REV    = 1120 ;    // eg: TETRIX Motor Encoder
-    static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // This is < 1.0 if geared UP
-    static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
-    static final double     CIRCUMFERENCE           = WHEEL_DIAMETER_INCHES * Math.PI;
-    static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
-                                                      (CIRCUMFERENCE);
-    static final double     DRIVE_SPEED             = 0.6;
-    static final double     TURN_SPEED              = 0.5;
+HardwareBionicbot         robot   = new HardwareBionicbot();   // Use a Pushbot's hardware
+private ElapsedTime runtime = new ElapsedTime();
+static final double     COUNTS_PER_MOTOR_REV    = 1120 ;    // eg: TETRIX Motor Encoder
+static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // This is < 1.0 if geared UP
+static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
+static final double     CIRCUMFERENCE           = WHEEL_DIAMETER_INCHES * Math.PI;
+static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
+        (CIRCUMFERENCE);
+static final double     DRIVE_SPEED             = 0.6;
+static final double     TURN_SPEED              = 0.5;
 
 
 
@@ -29,19 +29,18 @@ public class ColorSensingClass extends LinearOpMode {
 @Override
 public void runOpMode()  {
 
-    //Initilizes all of the Hardware
     robot.init(hardwareMap);
+
 
     waitForStart();
 
-    robot.LeftColorSensor.enableLed(true);
-    robot.RightColorSensor.enableLed(true);
+    robot.FrontColorSensor.enableLed(true);
 
     while(opModeIsActive())
     {
-       telemetry.addData("Color Number of Left Color Sensor: ", robot.LeftColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)));
-       telemetry.addData("Color Number of Right Color Sensor: ", robot.RightColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)));
-       telemetry.update();
+        telemetry.addData("Color Number", robot.FrontColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)));
+        telemetry.addData("Color Number", robot.BackColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)));
+        telemetry.update();
     }
 
 }

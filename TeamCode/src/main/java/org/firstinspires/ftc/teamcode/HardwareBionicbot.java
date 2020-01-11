@@ -47,7 +47,8 @@ public DcMotor leveler = null;
 public Servo Rightglock = null;
 public Servo Leftglock = null;
 public ModernRoboticsI2cColorSensor LeftColorSensor  = null;
-public ModernRoboticsI2cColorSensor RightColorSensor = null;
+public ModernRoboticsI2cColorSensor BackColorSensor = null;
+public ModernRoboticsI2cColorSensor FrontColorSensor = null;
 
 
 public final static double ARM_HOME = 0.0;
@@ -82,7 +83,8 @@ public void init(HardwareMap ahwMap) {
     Rightglock = hwMap.get(Servo.class, "Rightglock");
     Leftglock = hwMap.get(Servo.class, "Leftglock");
     LeftColorSensor = hwMap.get(ModernRoboticsI2cColorSensor.class,"LeftColor");
-    RightColorSensor = hwMap.get(ModernRoboticsI2cColorSensor.class, "RightColor");
+    BackColorSensor = hwMap.get(ModernRoboticsI2cColorSensor.class, "BackColor");
+    FrontColorSensor = hwMap.get(ModernRoboticsI2cColorSensor.class, "FrontColor");
 
 
 

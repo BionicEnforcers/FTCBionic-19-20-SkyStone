@@ -25,8 +25,8 @@ public void runOpMode() {
 
     robot.init(hardwareMap);
 
-    robot.RightColorSensor.enableLed(true);
-    robot.LeftColorSensor.enableLed(true);
+    robot.BackColorSensor.enableLed(true);
+    robot.FrontColorSensor.enableLed(true);
 
     telemetry.addData("Right Color Sensor is ", "Turned On");
     telemetry.addData("Left Color Sensor is ", "Turned On");
@@ -36,62 +36,68 @@ public void runOpMode() {
     while(opModeIsActive())
     {
         //Drive Forward Certain distance to scan Stones and Skystones
-        DriveForwardDistance(.7,25);
-        telemetry.addData("Color Number of Left Color Sensor: ", robot.LeftColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)));
-        telemetry.addData("Color Number of Right Color Sensor: ", robot.RightColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)));
+        DriveForwardDistance(1,29);
+        telemetry.addData("Color Number of Left Color Sensor: ", robot.FrontColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)));
+        telemetry.addData("Color Number of Right Color Sensor: ", robot.BackColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)));
         telemetry.update();
         sleep(1000);
         //Use the Left Color Sensor to Scan for a SkyStone
         //Checks if the Object is a Stone
-        if((robot.LeftColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)) == 8 || robot.LeftColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)) == 9) && (robot.RightColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)) == 8 || robot.RightColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)) == 9))
+        if((robot.FrontColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)) == 8 || robot.FrontColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)) == 9) && (robot.BackColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)) == 8 || robot.BackColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)) == 9))
         {
             //Since the object is a Stone the Robot Strafes to scan the next Stone
-            StrafRightDistance(.2,5);
-            telemetry.addData("Color Number of Left Color Sensor: ", robot.LeftColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)));
-            telemetry.addData("Color Number of Right Color Sensor: ", robot.RightColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)));
+            DriveBackwardDistance(.3,5);
+            sleep(1000);
+            StrafLeftDistance(1,10);
+            DriveForwardDistance(.3,5);
+            telemetry.addData("Color Number of Left Color Sensor: ", robot.FrontColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)));
+            telemetry.addData("Color Number of Right Color Sensor: ", robot.BackColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)));
             telemetry.update();
             sleep(1000);
             //After Strafing the Robot scans again to check what the next object is
-            if((robot.LeftColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)) == 8 || robot.LeftColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)) == 9) && (robot.RightColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)) == 8 || robot.RightColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)) == 9) )
+            if((robot.FrontColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)) == 8 || robot.FrontColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)) == 9) && (robot.BackColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)) == 8 || robot.BackColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)) == 9) )
             {
-                //This is SkyStone Location number 3 (SkyStone Stone Stone)
+                //This is SkyStone Location number 3 (Stone Stone SkyStone)
                 //Since the next object is also a Stone the robot strafes to the next object
-                StrafLeftDistance(.2,5);
+                DriveBackwardDistance(1,5);
+                sleep(1000);
+                StrafLeftDistance(1,10);
+                DriveForwardDistance(1,5);
                 //After the first two scanned objects are Stones the robot gets the third one because it is a SkyStone
-                DriveForwardDistance(.3,5);
+                DriveForwardDistance(1,5);
                 //Drops the latch attachment to get the Skystone
                 robot.Leftglock.setPosition(0);
                 sleep(1000);
                 //After getting the Skystone the Robot delivers is to the building zone
                     //Starts by driving backwards with the SkyStone
-                    DriveBackwardDistance(.5,15);
+                    DriveBackwardDistance(1,10);
                     //Turns Left to Face the Building Zone
-                    TurnLeftDistance(.5,22);
+                    TurnLeftDistance(1,22);
                     //Drives Forward to deliver Skystone into the building zone
-                    DriveForwardDistance(.5,25);
+                    DriveForwardDistance(1,50);
                     //Releases the SkyStone by bringing latch back up
                     robot.Leftglock.setPosition(.7);
                     //Drive Backward to the 2nd SkyStone which is located in the 3rd location closest to the wall
-                    DriveBackwardDistance(.5,50);
+                    DriveBackwardDistance(1,70);
                     //Turns Right so that the robot can face the SkyStone
-                    TurnRightDistance(.5,22);
+                    TurnRightDistance(1,22);
                     //Strafes a little bit to be fully aligned with the SkyStone
-                    StrafLeftDistance(.3,3);
+                    StrafLeftDistance(1,3);
                     //Drives Forward and picks up SkyStone
-                    DriveForwardDistance(.5,5);
+                    DriveForwardDistance(1,10);
                     robot.Rightglock.setPosition(0);
                     //Drives Backward with the SkyStone
-                    DriveBackwardDistance(.5,15);
+                    DriveBackwardDistance(1,9);
                     //Strafes a little with the SkyStone to prevent hitting the wall on the turn
-                    StrafRightDistance(.3,5);
+                    StrafRightDistance(1,5);
                     //Turns Left to face the robot towards the building zone
-                    TurnLeftDistance(.3,22);
+                    TurnLeftDistance(1,22);
                     //Drive Forward to deliver the SkyStone to the building zone
-                    DriveForwardDistance(.5,45);
+                    DriveForwardDistance(1,55);
                     //Releases the SkyStone by bringing the Latch up
                     robot.Rightglock.setPosition(.7);
                     //Drives Backward to park under the Alliance Bridge
-                    DriveBackwardDistance(.5,15);
+                    DriveBackwardDistance(1,12);
                     //Waits till the Autonomous time runs out
                     sleep(10000);
             }
@@ -105,33 +111,37 @@ public void runOpMode() {
                 sleep(1000);
                 //After getting the Skystone the Robot delivers is to the building zone
                     //Starts by driving backwards with the SkyStone
-                    DriveBackwardDistance(.5,15);
+                    DriveBackwardDistance(1,12);
                     //Turns Left to Face the Building Zone
-                    TurnLeftDistance(.5,22);
+                    TurnLeftDistance(1,22);
                     //Drives Forward to deliver Skystone into the building zone
-                    DriveForwardDistance(.5,25);
+                    DriveForwardDistance(1,45);
                     //Releases the SkyStone by bringing latch back up
                     robot.Leftglock.setPosition(.7);
                     //Drive Backward to the 2nd SkyStone which is located in the 2nd location in the middle of the group of 3
-                    DriveBackwardDistance(.5,50);
+                    DriveBackwardDistance(1,68);
                     //Turns Right so that the robot can face the SkyStone
-                    TurnRightDistance(.5,22);
+                    TurnRightDistance(1,22);
                     //Strafes a little bit to be fully aligned with the SkyStone
                     StrafLeftDistance(.3,3);
                     //Drives Forward and picks up SkyStone
-                    DriveForwardDistance(.5,5);
+                    DriveForwardDistance(1,9);
+                    sleep(500);
                     robot.Rightglock.setPosition(0);
                     //Drives Backward with the SkyStone
-                    DriveBackwardDistance(.5,15);
+                    DriveBackwardDistance(1,9);
+                    //Strafes Left to give robot space from wall
+                    StrafRightDistance(1,5);
                     //Turns Left to face the robot towards the building zone
-                    TurnLeftDistance(.3,22);
+                    TurnLeftDistance(1,22);
                     //Drive Forward to deliver the SkyStone to the building zone
-                    DriveForwardDistance(.5,45);
+                    DriveForwardDistance(1,70);
                     //Releases the SkyStone by bringing the Latch up
                     robot.Rightglock.setPosition(.7);
                     //Drives Backward to park under the Alliance Bridge
-                    DriveBackwardDistance(.5,15);
+                    DriveBackwardDistance(1,15);
                     //Waits till the Autonomous time runs out
+                    StrafRightDistance(5,1);
                     sleep(10000);
             }
 
@@ -139,7 +149,7 @@ public void runOpMode() {
         //If the first object Scanned is not a regular Stone
         else
         {
-            //This is SkyStone Location number 1 (Stone Stone SkyStone)
+            //This is SkyStone Location number 1 (SkyStone Stone Stone)
             //After scanning the 1st Location the color sensors says it isn't a regular stone so it is SkyStone
             DriveForwardDistance(.3,5);
             //Drops the latch attachment to get the Skystone
@@ -147,32 +157,33 @@ public void runOpMode() {
             sleep(1000);
             //After getting the Skystone the Robot delivers is to the building zone
                 //Starts by driving backwards with the SkyStone
-                DriveBackwardDistance(.5,15);
+                DriveBackwardDistance(1,10);
                 //Turns Left to Face the Building Zone
-                TurnLeftDistance(.5,22);
+                TurnLeftDistance(1,22);
                 //Drives Forward to deliver Skystone into the building zone
-                DriveForwardDistance(.5,25);
+                DriveForwardDistance(1,38);
                 //Releases the SkyStone by bringing latch back up
                 robot.Leftglock.setPosition(.7);
                 //Drive Backward to the 2nd SkyStone which is located in the 1st location in the left most of the group of 3
-                DriveBackwardDistance(.5,50);
+                DriveBackwardDistance(1,60);
                 //Turns Right so that the robot can face the SkyStone
-                TurnRightDistance(.5,22);
+                TurnRightDistance(1,22);
                 //Strafes a little bit to be fully aligned with the SkyStone
-                StrafLeftDistance(.3,3);
+                StrafLeftDistance(1,5);
                 //Drives Forward and picks up SkyStone
-                DriveForwardDistance(.5,5);
+                DriveForwardDistance(1,6);
+                sleep(500);
                 robot.Rightglock.setPosition(0);
                 //Drives Backward with the SkyStone
-                DriveBackwardDistance(.5,15);
+                DriveBackwardDistance(1,7);
                 //Turns Left to face the robot towards the building zone
-                TurnLeftDistance(.3,22);
+                TurnLeftDistance(1,22);
                 //Drive Forward to deliver the SkyStone to the building zone
-                DriveForwardDistance(.5,45);
+                DriveForwardDistance(1,65);
                 //Releases the SkyStone by bringing the Latch up
                 robot.Rightglock.setPosition(.7);
                 //Drives Backward to park under the Alliance Bridge
-                DriveBackwardDistance(.5,15);
+                DriveBackwardDistance(1,15);
                 //Waits till the Autonomous time runs out
                 sleep(10000);
 
