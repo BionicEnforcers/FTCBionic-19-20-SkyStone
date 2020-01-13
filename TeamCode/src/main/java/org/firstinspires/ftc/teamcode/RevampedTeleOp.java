@@ -72,6 +72,25 @@ public void runOpMode() {
         {
             StopDriving();
         }
+        //Latches
+            //Tiny Latch
+        if(gamepad2.a)
+        {
+            robot.Leftglock.setPosition(0);
+        }
+        else
+        {
+            robot.Leftglock.setPosition(.7);
+        }
+            //Large Latch
+        if(gamepad2.b)
+        {
+            robot.Rightglock.setPosition(0);
+        }
+        else
+        {
+            robot.Rightglock.setPosition(1);
+        }
 
 
     }

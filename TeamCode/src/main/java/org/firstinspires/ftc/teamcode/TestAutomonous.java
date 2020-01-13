@@ -48,10 +48,9 @@ public class TestAutomonous extends LinearOpMode
 
         waitForStart();
 
-//        DriveForwardDistance(.5,15);
-        DriveForwardDistance(.5,10);
-        sleep(500);
-        StrafRightDistance(1,10);
+        robot.Leftglock.setPosition(0);
+        sleep(2000);
+        robot.Rightglock.setPosition(.7);
 
 
     }

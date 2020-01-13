@@ -80,8 +80,8 @@ public void init(HardwareMap ahwMap) {
     lifter = hwMap.get(DcMotor.class,"lifter");
     pincher = hwMap.get(DcMotor.class, "pincher");
     leveler = hwMap.get(DcMotor.class,"leveler");
-    Rightglock = hwMap.get(Servo.class, "Rightglock");
-    Leftglock = hwMap.get(Servo.class, "Leftglock");
+    Rightglock = hwMap.get(Servo.class, "Largeglock");
+    Leftglock = hwMap.get(Servo.class, "Smallglock");
     LeftColorSensor = hwMap.get(ModernRoboticsI2cColorSensor.class,"LeftColor");
     BackColorSensor = hwMap.get(ModernRoboticsI2cColorSensor.class, "BackColor");
     FrontColorSensor = hwMap.get(ModernRoboticsI2cColorSensor.class, "FrontColor");
