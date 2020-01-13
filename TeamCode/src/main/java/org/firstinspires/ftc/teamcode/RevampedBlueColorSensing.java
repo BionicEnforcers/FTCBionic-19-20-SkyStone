@@ -171,7 +171,7 @@ public void runOpMode() {
                 //Turns Right so that the robot can face the SkyStone
                 TurnRightDistance(1,22);
                 //Strafes a little bit to be fully aligned with the SkyStone
-                StrafRightDistance(1,4);
+                StrafLeftDistance(1,4);
                 //Drives Forward and picks up SkyStone
                 DriveForwardDistance(1,8);
                 sleep(500);
