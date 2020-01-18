@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.RevampedTournamentCode;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cColorSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -51,7 +51,7 @@ public void runOpMode() {
             DriveBackwardDistance(.3,5);
             sleep(1000);
             StrafRightDistance(1,10);
-            DriveForwardDistance(.3,6);
+            DriveForwardDistance(.3,8);
             telemetry.addData("Color Number of Left Color Sensor: ", robot.FrontColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)));
             telemetry.addData("Color Number of Right Color Sensor: ", robot.BackColorSensor.readUnsignedByte((ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER)));
             telemetry.update();
@@ -61,7 +61,7 @@ public void runOpMode() {
             {
                 //This is SkyStone Location number 3 (SkyStone Stone Stone)
                 //Since the next object is also a Stone the robot strafes to the next object
-                DriveBackwardDistance(1,6);
+                DriveBackwardDistance(1,8);
                 sleep(1000);
                 StrafRightDistance(1,7);
                 //After the first two scanned objects are Stones the robot gets the third one because it is a SkyStone
@@ -109,6 +109,7 @@ public void runOpMode() {
             {
                 //This is SkyStone Location number 2 (Stone SkyStone Stone)
                 //After scanning the 2nd Location the color sensors says it isn't a regular stone so it is SkyStone
+
                 StrafLeftDistance(1,4);
                 DriveForwardDistance(.3,5);
                 //Drops the latch attachment to get the Skystone
