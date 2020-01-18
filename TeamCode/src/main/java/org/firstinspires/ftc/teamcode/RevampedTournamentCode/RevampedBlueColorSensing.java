@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.RevampedTournamentCode;
 
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cColorSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -6,10 +6,12 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.HardwareBionicbot;
+
 @Autonomous(name="BlueStoneSide", group="BionicBot")
 public class RevampedBlueColorSensing extends LinearOpMode {
 
-HardwareBionicbot         robot   = new HardwareBionicbot();   // Use a Pushbot's hardware
+HardwareBionicbot robot   = new HardwareBionicbot();   // Use a Pushbot's hardware
 private ElapsedTime runtime = new ElapsedTime();
 
 static final double     COUNTS_PER_MOTOR_REV    = 1120 ;    // eg: TETRIX Motor Encoder
