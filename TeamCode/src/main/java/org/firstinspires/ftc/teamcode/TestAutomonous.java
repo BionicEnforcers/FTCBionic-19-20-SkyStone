@@ -49,7 +49,7 @@ public class TestAutomonous extends LinearOpMode
         waitForStart();
 
 
-        robot.Rightglock.setPosition(.2);
+        robot.Rightglock.setPosition(-.5);
         sleep(10000);
 
     }

@@ -40,20 +40,20 @@ public void runOpMode() {
         }
         if(gamepad2.left_stick_y<0)
         {
-            robot.leveler.setPower(gamepad2.left_stick_y);
+            robot.lifter1.setPower(gamepad2.left_stick_y);
         }
         else if(gamepad2.left_stick_y > 0)
         {
-            robot.leveler.setPower(gamepad2.left_stick_y);
+            robot.lifter1.setPower(gamepad2.left_stick_y);
         }
         if(gamepad2.a)
         {
-            robot.leveler.setPower(1);
+            robot.lifter1.setPower(1);
         }
 
         else
         {
-            robot.leveler.setPower(0);
+            robot.lifter1.setPower(0);
         }
         if(gamepad2.right_bumper)
         {

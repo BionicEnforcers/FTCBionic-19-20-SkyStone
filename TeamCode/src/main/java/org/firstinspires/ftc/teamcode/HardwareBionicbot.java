@@ -44,7 +44,7 @@ public DcMotor leftDrive   = null;
 public DcMotor rightDrive  = null;
 public DcMotor pincher = null;
 public DcMotor lifter = null;
-public DcMotor leveler = null;
+public DcMotor lifter1 = null;
 public Servo Rightglock = null;
 public Servo Leftglock = null;
 public ModernRoboticsI2cColorSensor LeftColorSensor  = null;
@@ -80,7 +80,7 @@ public void init(HardwareMap ahwMap) {
     rightBack = hwMap.get(DcMotor.class, "right_back");
     lifter = hwMap.get(DcMotor.class,"lifter");
     pincher = hwMap.get(DcMotor.class, "pincher");
-    leveler = hwMap.get(DcMotor.class,"leveler");
+    lifter1 = hwMap.get(DcMotor.class,"lifter1");
     Rightglock = hwMap.get(Servo.class, "Largeglock");
     Leftglock = hwMap.get(Servo.class, "Smallglock");
     LeftColorSensor = hwMap.get(ModernRoboticsI2cColorSensor.class,"LeftColor");

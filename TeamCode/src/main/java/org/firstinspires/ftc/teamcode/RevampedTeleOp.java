@@ -92,6 +92,22 @@ public void runOpMode() {
             robot.Rightglock.setPosition(1);
         }
 
+            //Lifter
+        if(gamepad2.left_stick_y>0)
+        {
+            robot.lifter.setPower(.3);
+            robot.lifter1.setPower(.3);
+        }
+        else if(gamepad2.left_stick_y<0)
+        {
+            robot.lifter.setPower(-.3);
+            robot.lifter1.setPower(-.3);
+        }
+        else
+        {
+            robot.lifter.setPower(0);
+            robot.lifter1.setPower(0);
+        }
 
     }
 
