@@ -51,7 +51,7 @@ public void runOpMode()
 
     waitForStart();
 
-    StrafLeftDistance(.7,10);
+    StrafRightDistance(.7,10);
     sleep(500);
     DriveForwardDistance(1,29);
     robot.Rightglock.setPosition(.3);
@@ -71,6 +71,8 @@ public void runOpMode()
     robot.rightDrive.setPower(0);
     robot.leftBack.setPower(0);
     robot.rightBack.setPower(0);
+
+    sleep(100000);
 
 
 

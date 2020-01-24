@@ -76,11 +76,11 @@ public void runOpMode() {
             //Tiny Latch
         if(gamepad2.a)
         {
-            robot.Leftglock.setPosition(0);
+            robot.Leftglock.setPosition(.6);
         }
         else
         {
-            robot.Leftglock.setPosition(.7);
+            robot.Leftglock.setPosition(0);
         }
             //Large Latch
         if(gamepad2.b)
